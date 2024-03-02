@@ -1,5 +1,5 @@
 export default function AvatarComp() {
     return (
-        <img className="avatar" src="./images/rencorsito-logo.svg" alt="logo rencorsito"/>
+        <a href="./index.html"><img className="avatar" src="./images/rencorsito-logo.svg" alt="logo rencorsito"/></a>
     )
 }
