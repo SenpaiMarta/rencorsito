@@ -3,6 +3,14 @@
     src: url('/fonts/Mat-Saleh.woff') format('woff');
   }
 
+body {
+    background-color: #f2e8df;
+}
+
+.enlacesBoton {
+    text-decoration: none;
+    color: inherit;
+}
 .barraPpal {
     display: flex;
     flex-flow: column nowrap;
@@ -76,10 +84,75 @@ input::placeholder {
     height: 20px;
 }
 
-h1 {
+h1, h2 {
     font-family: "PT Sans", sans-serif;
     font-weight: 700;
     font-style: normal;
     color: #314a9a;
     text-align: center;
 }
+
+h4 {
+    font-family: 'Mat-Saleh';
+    font-size: 1.5rem;
+    color: #314a9a;
+    text-align: center;
+}
+
+p {
+    font-family: "PT Sans", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: #314a9a;
+    text-align: center; 
+}
+
+.sectionBotonCat {
+    display: flex;
+    justify-content: center;
+}
+
+.botonCat {
+    background-color: #f2e8df;
+    border: 4px solid #314a9a;
+    border-radius: 20px;
+    color: #314a9a; 
+    padding: 10px;
+    font-family: 'Mat-Saleh';
+    font-size: 1rem;
+    margin: 10px;
+    cursor: pointer;
+
+}
+
+.sectionProds {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 15px;
+}
+
+.prodCards {
+    display: flex;
+    flex-flow: column;
+    width: 200px;
+    border: 4px solid #314a9a;
+    border-radius: 20px;
+    padding: 10px;
+    align-items: center;
+
+}
+
+.botonVerMas {
+    background-color: #314a9a;
+    border: none;
+    border-radius: 20px;
+    color: #f2e8df; 
+    padding: 10px;
+    font-family: 'Mat-Saleh';
+    font-size: 1.2rem;
+    margin: 10px;
+    cursor: pointer;
+
+}
+

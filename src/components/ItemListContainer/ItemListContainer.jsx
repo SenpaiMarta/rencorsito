@@ -1,9 +1,64 @@
-const ItemListContainer = ({tituloPag}) => {
+import {useEffect, useState} from 'react'
+import {useNavigate} from 'react-router-dom'
+import {getProducts} from '../../asyncMock'
+
+export default function ItemListContainer() {
+    const navegacion = useNavigate()
+
+    const [productos, setProducts] = useState([])
+    const [catSeleccionada, setCatSeleccionada] = useState(null)
+
+    useEffect(() => {
+        getProducts.then(data => setProducts(data))
+    }, [])
+
+    const handleClick = (id) => {
+        navegacion(`/regala/${id}`)
+    }
+
+    const handleCatCambio = (categoria) => {
+        navegacion(`/regala/categoria/${categoria}`)
+    }
+
+    const categoriasUnicas = [...new Set(productos.map(producto => producto.categoria))];
+
     return (
-    <>
-        <h1>{tituloPag}</h1>
-    </>
+        <>
+        <section>
+            <div className="sectionBotonCat">
+            {categoriasUnicas.map(categoria => (
+                <button className="botonCat" key={categoria} onClick={() => handleCatCambio(categoria)}>{categoria}
+                </button>
+                ))}
+            </div>
+    </section>
+        <section >
+            <div className="sectionProds">
+            {
+            productos.filter(producto => !catSeleccionada || producto.categoria === catSeleccionada)
+            .map(producto => (
+                    <article key={producto.id} className="prodCards">
+                        <h4>{producto.titulo}</h4>
+                        <p>{producto.resumen}</p>
+                        <button className="botonVerMas" onClick={()=>handleClick(producto.id)}>VER +</button>
+                    </article>
+                ) )
+            }
+            </div>
+        </section>
+        {/*<section>
+            {
+                productos.map(producto =>(
+                    <article key={producto.id}>
+                        <h4>{producto.titulo}</h4>
+                        <p>{producto.resumen}</p>
+                        <button onClick={()=>handleClick(producto.id)}>Ver más</button>
+
+                    </article>
+                ) )
+            }
+        </section>
+        */}
+        </>
     )
 }
-
-export default ItemListContainer

@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom'
 import CartWidget from './CartWidget'
 import AvatarComp from './AvatarComp'
 import SearchComp from './SearchComp'
@@ -7,10 +8,9 @@ export default function NavBar () {
         <div className="barraPpal">
             <AvatarComp/>
             <nav className="navbar">
-                <button className='botonMenu'>EL TEAM</button>
-                <button className='botonMenu'>REGALA RENCOR</button>
-                <button className='botonMenu'>APOYA EL RENCOR</button>
-                <button className='botonMenu'>CONTACTA</button>
+                <button className='botonMenu'><Link className="enlacesBoton" to={'/regala'}>REGALA RENCOR</Link></button>
+                <button className='botonMenu'><Link className="enlacesBoton" to={'/apoya'}>APOYA EL RENCOR</Link></button>
+                <button className='botonMenu'><Link className="enlacesBoton" to={'/contacta'}>CONTACTA</Link></button>
             </nav>
             <SearchComp/>
             <CartWidget/>
