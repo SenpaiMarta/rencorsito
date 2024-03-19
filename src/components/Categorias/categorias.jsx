@@ -1,22 +1,13 @@
 import {useParams} from 'react-router-dom'
-import {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
-import {getProduct} from '../../asyncMock'
+import {getProdCat} from '../../asyncMock'
+
 
 
 export default function Categorias() {
     const {prodCat} = useParams() 
-    const [producto, setProduct] = useState({})
+    const ProdPorCategorias = getProdCat(prodCat)
     const navegacion = useNavigate()
-
-
-    useEffect(() => {
-        getProduct(prodCat).then(data => {
-            setProduct(data)
-        }).catch(error => {
-            console.error('Error al obtener el producto:', error)
-        })
-    }, [prodCat])
 
     const handleClick = (id) => {
         navegacion(`/regala/${id}`)
@@ -24,14 +15,19 @@ export default function Categorias() {
 
     return (
         <>
-            <section>
-                <div>
-                                <article key={producto.id}>
-                                    <h4>{producto.titulo}</h4>
-                                    <p>{producto.resumen}</p>
-                                    <button onClick={() => handleClick(producto.id)}>Ver más</button>
-                                </article>
+            <h2>Regalos para personas que te provocan {prodCat}</h2>
+
+            <section className="sectionProds">
+                {ProdPorCategorias.map(producto => (
+                <div key={producto.id}>
+                    <article key={producto.id} className="prodCards">
+                        <h4>{producto.titulo}</h4>
+                        <img onClick={()=>handleClick(producto.id)} src={producto.imagen} alt={producto.titulo} className="imagenCard"/>
+                        <p>{producto.resumen}</p>
+                        <button onClick={() => handleClick(producto.id)} className="botonVerMas">VER +</button>
+                    </article>
                 </div>
+                ))}
             </section>
         </>
     );

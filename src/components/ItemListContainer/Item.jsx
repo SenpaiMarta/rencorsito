@@ -13,12 +13,18 @@ export default function Item() {
 
     return (
         <>
-        <div>
-            <h2>{producto.titulo}</h2>
-            <p>{producto.descripcion}</p>
-            <p>{producto.categoria}</p>
+        <section className="itemProd">
+            <div>
+                <img src={producto.imagen} alt={producto.titulo} className="imagenProd"/>
+            </div>
 
-        </div>
+            <div className="textoItemProd">
+                <h2 className="tituloProds">{producto.titulo}</h2>
+                <p className="textoProds">{producto.descripcion}</p>
+                <button className="botonQuiero">LO QUIERO</button>
+            </div>
+        </section>
+
         </>
     )
 }

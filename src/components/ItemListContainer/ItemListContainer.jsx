@@ -6,7 +6,6 @@ export default function ItemListContainer() {
     const navegacion = useNavigate()
 
     const [productos, setProducts] = useState([])
-    const [catSeleccionada, setCatSeleccionada] = useState(null)
 
     useEffect(() => {
         getProducts.then(data => setProducts(data))
@@ -31,14 +30,15 @@ export default function ItemListContainer() {
                 </button>
                 ))}
             </div>
-    </section>
+        </section>
+
         <section >
             <div className="sectionProds">
             {
-            productos.filter(producto => !catSeleccionada || producto.categoria === catSeleccionada)
-            .map(producto => (
+            productos.map(producto => (
                     <article key={producto.id} className="prodCards">
                         <h4>{producto.titulo}</h4>
+                        <img onClick={()=>handleClick(producto.id)} src={producto.imagen} alt={producto.titulo} className="imagenCard"/>
                         <p>{producto.resumen}</p>
                         <button className="botonVerMas" onClick={()=>handleClick(producto.id)}>VER +</button>
                     </article>
@@ -46,19 +46,6 @@ export default function ItemListContainer() {
             }
             </div>
         </section>
-        {/*<section>
-            {
-                productos.map(producto =>(
-                    <article key={producto.id}>
-                        <h4>{producto.titulo}</h4>
-                        <p>{producto.resumen}</p>
-                        <button onClick={()=>handleClick(producto.id)}>Ver más</button>
-
-                    </article>
-                ) )
-            }
-        </section>
-        */}
         </>
     )
 }
