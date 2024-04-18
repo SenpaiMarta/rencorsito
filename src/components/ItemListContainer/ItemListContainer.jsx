@@ -1,14 +1,23 @@
 import {useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
-import {getProducts} from '../../asyncMock'
+import {getProducts} from '../../firebase/firebase'
+
 
 export default function ItemListContainer() {
+    
     const navegacion = useNavigate()
 
     const [productos, setProducts] = useState([])
 
+    async function dameProductos() {
+        const productos = await getProducts()
+        setProducts(productos)
+        console.log(productos)
+    }
+
+
     useEffect(() => {
-        getProducts.then(data => setProducts(data))
+        dameProductos()
     }, [])
 
     const handleClick = (id) => {
@@ -20,6 +29,7 @@ export default function ItemListContainer() {
     }
 
     const categoriasUnicas = [...new Set(productos.map(producto => producto.categoria))];
+    
 
     return (
         <>
@@ -30,12 +40,13 @@ export default function ItemListContainer() {
                 </button>
                 ))}
             </div>
-        </section>
+            </section>
+
 
         <section >
             <div className="sectionProds">
             {
-            productos.map(producto => (
+            productos.map((producto) => (
                     <article key={producto.id} className="prodCards">
                         <h4>{producto.titulo}</h4>
                         <img onClick={()=>handleClick(producto.id)} src={producto.imagen} alt={producto.titulo} className="imagenCard"/>
